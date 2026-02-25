@@ -1,0 +1,21 @@
+#requestsNav {
+    background-color: var(--secondary-color-90);
+    color: var(--secondary-color);
+}
+
+.service-request {
+    border: 1px solid var(--section-grey-outline);
+    border-radius: var(--shared-border-radius);
+    padding: 16px;
+}
+
+.service-request-title {
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.request-buttons-wrapper {
+    margin-top:12px;
+    display: flex;
+    gap: 8px;
+}

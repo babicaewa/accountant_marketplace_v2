@@ -1,0 +1,60 @@
+.service-request-sub-text {
+    font-size: 0.8rem;
+    color:var(--light-title-color);
+}
+
+.progress-wrapper {
+    display: flex;
+    gap: 4px;
+    margin-top: 12px;
+}
+
+.progress-stage {
+    width: 25%;
+}
+
+.progress-pill {
+    height:8px;
+    background-color: var(--secondary-color-20);
+    border-radius: var(--pill-border-radius);
+}
+
+.current-stage {
+    background-color: var(--secondary-color-20);
+    animation: breathe 1.5s infinite;
+}
+
+.later-stage {
+    background-color: #d6d6d9;
+}
+
+.progress-stage-name {
+    font-size: 0.9rem;
+}
+
+.status-wrapper {
+    margin: 16px 0px;
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap:4px;
+}
+
+.status-pill {
+    padding: 2px 24px;
+    border-radius: var(--pill-border-radius);
+    background-color: var(--secondary-color-10);
+    color: var(--main-color);
+}
+
+.document-sub-section {
+    padding: 8px;
+}
+
+
+.sub-section-title {
+    display: flex;
+    gap: 8px;
+    font-weight: 600;
+    margin:12px 0px;
+}

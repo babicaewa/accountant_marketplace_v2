@@ -1,0 +1,325 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" type="text/css" href="{% static '/css/shared_features.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static '/css/profile.css' %}">
+    <title>legal_marketplace</title>
+</head>
+{% include "navbar/navbar.html" %}
+
+<body>
+    <div class="modal fade" id="requestServicesModal" tabindex="-1" aria-labelledby="requestServicesModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <span class="modal-title" id="requestServicesModalLabel">Request Services from {{professional.first_name}}</span>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form action="send_service_request/" method="POST" class="service-request-form">
+                {% csrf_token %}
+                <div class="input-wrapper">
+                    <label for="emailInput" class="sub-section-request-title">Enter your email:</label>
+                    <input type="email" id="emailInput" name="emailInput" class="search-input" placeholder="Email">
+                </div>
+                <div class="input-wrapper">
+                    <label for="" class="sub-section-request-title">Select all services you require:</label>
+                    <div class="services-wrapper">
+                        {% for service in professional_services %}
+                        <div class="service-item">
+                            <input type="checkbox" class="service-checkbox">
+                            <label for="">{{service.service}}</label>
+                            <div class="quantity-wrapper">
+                                <label for="{{service.service}}">Amount Needed</label>
+                                <input type="number" id="{{service.service}}" name="service_id_{{service.id}}" class="search-input">
+                            </div>
+                        </div>
+                        {%endfor%}
+                    </div>
+                </div>
+                <div class="input-wrapper">
+                    <label for="" class="sub-section-request-title">Request Description</label>
+                    <textarea name="requestDescription" placeholder="Describe your situation and what you require from {{professional.first_name}}.." id="" cols="30" rows="6"></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button class="classic-button" style="width:100%;">Send Request</button>
+                  </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <div class="main-content">
+        <div class="profile-photos-wrapper">
+            <div class="banner-wrapper">
+                <img src="{% static 'media/profile-banner.jpg' %}" alt="">
+            </div>
+            <div class="pfp-and-name">
+                <div class="pfp-wrapper shadow">
+                    <img src="{% static 'media/headshot.png' %}" alt="">
+                </div>
+                <div class="main-info">
+                    <h1>{{professional.first_name}} {{professional.last_name}}</h1>
+                    {%if most_recent_experience%}
+                        <p class="company-text">{{most_recent_experience.role}} at {{most_recent_experience.company_name}}</p>
+                    {%endif%}
+                    <div class="contact-buttons">
+                        <button class="classic-button" data-bs-toggle="modal" data-bs-target="#requestServicesModal">
+                            Request Services
+                        </button>
+                        <button class="classic-button-inverse">
+                            Email
+                        </button>
+                        <button class="classic-button-inverse">
+                            Consult
+                        </button>
+                    </div>
+                    <hr class="custom-hr">
+                </div>
+            </div>
+        </div>
+        <div class="profile-content">
+            <div class="profile-directory">
+                <div class="checkpoint" id="bio-checkpoint">
+                    <a class="directory-link" href="#bio">Bio</a>
+                </div>
+                <div class="checkpoint" id="fees-checkpoint">
+                    <a class="directory-link" href="#fees">Fees</a>
+                </div>
+                <div class="checkpoint" id="experience-checkpoint">
+                    <a class="directory-link" href="#experience">Experience</a>
+                </div>
+                <div class="checkpoint" id="languages-checkpoint">
+                    <a class="directory-link" href="#languages">Languages</a>
+                </div>
+                <div class="checkpoint" id="location-checkpoint">
+                    <a class="directory-link" href="#location">Location</a>
+                </div>
+                <div class="checkpoint" id="reviews-checkpoint">
+                    <a class="directory-link" href="#reviews">Reviews</a>
+                </div>
+            </div>
+            <div class="profile-info">
+                <div class="content-section" id="bio">
+                    <div class="content-section-text">
+                        <div class="section-text-title">
+                            <div class="title-side-box"></div>
+                            <h4>About {{professional.first_name}}</h4>
+                        </div>
+                        <p>{{professional.bio}}</p>
+                        <div class="quote-wrapper">
+                            "{{professional.bio_quote}}"
+                        </div>
+                    </div>
+                </div>
+                <div class="multi-section-wrapper-horizontal">
+                    <div class="content-section" id="fees">
+                        <div class="content-section-text">
+                            <div class="section-text-title">
+                                <div class="title-side-box"></div>
+                                <h4>Fees</h4>
+                            </div>
+                            <div class="all-fees-wrapper">
+                                {% for service in professional_services %}
+                                <div class="fee-wrapper">
+                                    <div class="fee-type">
+                                       {{service.service}}
+                                    </div>
+                                    <div class="fee-cost">
+                                        ${{service.fee}}
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                            <hr class="custom-hr">
+                            <button class="classic-button" style="width: 100%;">
+                                Request Services
+                            </button>
+                        </div>
+                    </div>
+                    <div class="content-section" id="experience">
+                        <div class="content-section-text">
+                            <div class="section-text-title">
+                                <div class="title-side-box"></div>
+                                <h4>Experience</h4>
+                            </div>
+                            <div class="all-experience-wrapper">
+                                {% for experience in professional_experience %}
+                                    <div class="experience-wrapper">
+                                        <div class="experience-title-and-date">
+                                            <div class="experience-title">
+                                                {{experience.role}}
+                                                <div class="experience-company">
+                                                    {{experience.company_name}}
+                                                </div>
+                                            </div>
+                                            <div class="experience-date">
+                                                {{experience.start_year}}
+                                                -
+                                                {%if experience.end_year%}{{experience.end_year}}{%else%}Current{%endif%}
+                                            </div>
+                                        </div>
+                                        <div class="experience-focus sub-section">
+                                            Focus: {{experience.focus}}
+                                        </div>
+                                    </div>
+                                    {% if not forloop.last %}
+                                        <hr class="small-divider-hr">
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-section" id="languages">
+                    <div class="content-section-text">
+                        <div class="section-text-title">
+                            <div class="title-side-box"></div>
+                            <h4>Languages</h4>
+                        </div>
+                        <div class="sub-section shadow-sm">
+                            <i class="bi bi-globe2"></i>
+                            {% for language in professional.languages_spoken.all %}{{language}}{%if not forloop.last %}, {%endif%}{%endfor%}  
+                        </div>
+                    </div>
+                </div>
+                <div class="content-section" id="location">
+                    <div class="content-section-text">
+                        <div class="section-text-title">
+                            <div class="title-side-box"></div>
+                            <h4>Office Location</h4>
+                        </div>
+                        {%if location_lat and location_long%}
+                        <div id="map" data-address="{{location_address}}" data-lat_long="{{location_lat}},{{location_long}}"></div>
+                        {%else%}
+                        <div class="sub-section">
+                            Failed to load map, please try again later.
+                        </div>
+                        {%endif%}
+                    </div>
+                </div>
+                <div class="content-section" id="reviews">
+                    <div class="content-section-text">
+                        <div class="section-text-title">
+                            <div class="title-side-box"></div>
+                            <h4>Reviews</h4>
+                        </div>
+                        {%if total_professional_reviews_count != 0%}
+                            <div class="reviews-totals-wrapper">
+                                <div class="review-main-info">
+                                    <h5>Total Rating</h5>
+                                    <div class="rating-stars">
+                                        {%if total_professional_reviews_count > 0%}
+                                        {% for num in "12345" %}
+                                            {% if forloop.counter == half_star_index %}
+                                            <i class="bi bi-star-half star-icon"></i>
+                                            {% elif forloop.counter <= avg_review_rating %}
+                                            <i class="bi bi-star-fill star-icon"></i>
+                                            {% else %}
+                                            <i class="bi bi-star star-icon"></i>
+                                            {% endif %}
+                                        {%endfor%}
+                                    {%endif%}
+                                    </div>
+                                    <span class="total-ratings-count">Out of {{total_professional_reviews_count}}{%if professional_reviews_count == 1%} Review {%else%} Reviews {%endif%} </span>
+                                </div>
+                                <div class="rating-bars-wrapper">
+                                    <div class="rating-bar-wrapper">
+                                        <span class="rating-title">5 Stars</span>
+                                        <div class="rating-bar" id="5StarsRatingBar">
+                                            <div class="rating-bar-amount" style="width:{{review_rating_counts_percentages.4}}%"></div>
+                                        </div>
+                                        <span class="rating-percent" id="5StarPercent">{{review_rating_counts_percentages.4}}%</span>
+                                    </div>
+                                    <div class="rating-bar-wrapper">
+                                        <span class="rating-title">4 Stars</span>
+                                        <div class="rating-bar" id="4StarsRatingBar">
+                                            <div class="rating-bar-amount" style="width:{{review_rating_counts_percentages.3}}%"></div>
+                                        </div>
+                                        <span class="rating-percent" id="5StarPercent">{{review_rating_counts_percentages.3}}%</span>
+                                    </div>
+                                    <div class="rating-bar-wrapper">
+                                        <span class="rating-title">3 Stars</span>
+                                        <div class="rating-bar" id="3StarsRatingBar">
+                                            <div class="rating-bar-amount" style="width:{{review_rating_counts_percentages.2}}%"></div>
+                                        </div>
+                                        <span class="rating-percent" id="5StarPercent">{{review_rating_counts_percentages.2}}%</span>
+                                    </div>
+                                    <div class="rating-bar-wrapper">
+                                        <span class="rating-title">2 Stars</span>
+                                        <div class="rating-bar" id="2StarsRatingBar">
+                                            <div class="rating-bar-amount" style="width:{{review_rating_counts_percentages.1}}%"></div>
+                                        </div>
+                                        <span class="rating-percent" id="5StarPercent">{{review_rating_counts_percentages.1}}%</span>
+                                    </div>
+                                    <div class="rating-bar-wrapper">
+                                        <span class="rating-title">1 Star</span>
+                                        <div class="rating-bar" id="1StarRatingBar">
+                                            <div class="rating-bar-amount" style="width:{{review_rating_counts_percentages.0}}%"></div>
+                                        </div>
+                                        <span class="rating-percent" id="5StarPercent">{{review_rating_counts_percentages.0}}%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="custom-hr" style="margin-bottom: 0 !important;">
+                        <div class="all-reviews-wrapper">
+                            {%for review in professional_reviews%}
+                                <div class="review">
+                                    <div class="review-title">
+                                        <div class="review-info">
+                                            <div class="review-date">
+                                                {{review.date}}
+                                            </div>
+                                            <div class="review-cert">
+                                                Certified Client
+                                                <i class="bi bi-info-circle-fill main-info-icon" data-bs-toggle="tooltip" data-bs-placement="top"
+                                                data-bs-custom-class="custom-tooltip"
+                                                data-bs-title="This review is from a real client of this professional."></i>
+                                            </div>
+                                        </div>
+                                        <div class="review-rating">
+                                            {% for star in "12345"%}
+                                                {% if forloop.counter <= review.review_rating%}
+                                                <i class="bi bi-star-fill star-icon"></i>
+                                                {%else%}
+                                                <i class="bi bi-star star-icon"></i>
+                                                {%endif%}
+                                            {%endfor%}
+                                        </div>
+                                    </div>
+                                    <div class="review-text">
+                                        {{review.review_text}}
+                                    </div>
+                                </div>
+                                {% if not forloop.last %}
+                                    <hr class="small-divider-hr">
+                                {% endif %}
+                            {%endfor%}
+                        </div>
+                        {%else%}
+                        No Reviews Yet.
+                        {%endif%}
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+{% include "footer/footer.html" %}
+
+</html>
+
+<script src="{% static '/js/profile.js' %}"></script>
+<script src="{% static '/js/shared_features.js' %}"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

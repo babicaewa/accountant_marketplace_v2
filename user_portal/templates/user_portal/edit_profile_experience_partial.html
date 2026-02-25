@@ -1,0 +1,42 @@
+<div class="input-wrapper general-input-wrapper" id="allExperience">
+    <label class="input-label">Work Experience</label>
+    <div class="all-experience-wrapper">
+        {% for experience in all_experiences %}
+        <div class="experience-wrapper">
+            <div class="experience-title-and-date">
+                <div class="experience-title">
+                    <div class="experience-id" data-experience-id="{{experience.id}}" style="display:none;"></div>
+                    <span class="experience-role">{{experience.role}}</span>
+                    <div class="experience-company">
+                       <span class="experience-company-name">{{experience.company_name}}</span>
+                    </div>
+                    <div class="experience-date">
+                       <span class="experience-start-year">{{experience.start_year}}</span>
+                        -
+                        <span class="experience-end-year">{%if experience.end_year%}{{experience.end_year}}{%else%}Current{%endif%}</span>
+                    </div>
+                </div>
+                <div class="experience-change-buttons">
+                    <button type="button" class="edit-button edit-experience-button"  data-bs-toggle="modal" data-bs-target="#addExperienceModal">
+                        <i class="bi bi-pencil"></i>
+                    </button>
+                    <button type="button" 
+                    class="edit-button edit-delete-button delete-experience-button" 
+                    hx-post="{% url 'delete_experience' experience.id %}" 
+                    hx-target="#allExperience">
+                    {% csrf_token %}
+                        <i class="bi bi-trash"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="experience-focus sub-section">
+                Focus: <span class="experience-focus-text">{{experience.focus}}</span>
+            </div>
+        </div>
+        {% if not forloop.last %}
+            <hr class="small-divider-hr">
+        {% endif %}
+        {%endfor%}
+    </div>
+    <button class="classic-button-inverse" type="button" id="newExperienceButton" data-bs-toggle="modal" data-bs-target="#addExperienceModal">Add Experience</button>
+</div>

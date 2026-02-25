@@ -1,0 +1,21 @@
+{% load static %}
+
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static '/css/forum_header.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static '/css/forum_shared.css' %}">
+</head>
+
+<div class="forum-header">
+    <img src="{% static 'media/forum-header-img.jpg' %}" alt="forum-header-img" id="forumHeaderImg">
+    <div class="img-overlay"></div>
+    <div class="forum-header-content-wrapper">
+        <h1 class="forum-title">legal_marketplace Community</h1>
+        <p>Where questions meet expert answers—from trusted accountants.</p>
+        <form action="" class="forum-input-form">
+            <div class="search-input-wrapper">
+                <i class="bi bi-search"></i>
+                <input class="general-search-input" id="forumSearchInput" type="text" placeholder="Search or ask a question">
+            </div>
+        </form>
+    </div>
+</div>

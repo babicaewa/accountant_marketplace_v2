@@ -1,0 +1,141 @@
+#customizeProfileNav {
+    background-color: var(--secondary-color-90);
+    color: var(--secondary-color);
+}
+
+.input-wrapper {
+    justify-content: center;
+    gap: 4px;
+}
+
+.general-input-wrapper {
+    margin: 12px 0px;
+    justify-content: flex-start;
+}
+
+.sub-input-wrapper {
+    margin:0px 0px 12px 0px;
+}
+
+.sub-input-wrapper label {
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.horizontal-multi-inputs-wrapper {
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+}
+
+.custom-checkbox-wrapper {
+    flex-direction: row !important;
+    justify-content: left !important;
+    margin:0px !important;
+}
+
+.custom-checkbox-input {
+    width: auto !important;
+    margin-top: 0px !important;
+}
+
+.checkbox-label {
+    font-size: 0.7rem !important;
+}
+
+.pfp-and-name-wrapper {
+    display: flex;
+    gap: 8px;
+}
+
+.editable-pfp {
+    height: 120px;
+    width: 120px;
+    border-radius: var(--shared-border-radius);
+}
+
+.name-inputs {
+    display: flex;
+    gap:12px;
+}
+
+.multi-sub-inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding:12px;
+}
+
+.input-label {
+    font-size: 1.1rem !important;
+}
+
+.all-languages-wrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 8px 0px;
+}
+
+.language-tag-wrapper {
+    position: relative;
+    cursor: pointer;
+}
+
+.language-tag-wrapper:hover .language-tag {
+    background-color: #db4b4b !important;
+    color: white !important;
+    border: 1px solid #db4b4b !important;
+    text-decoration: line-through;
+}
+
+
+.delete-button {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    border-radius: 50%;
+    background-color: white;
+    border:1px solid;
+    height: 16px;
+    width: 16px;
+    display:none;
+    align-items: center;
+    justify-content: center;
+}
+
+.buttons-wrapper {
+    display: flex;
+    gap: 12px;
+}
+
+#languagesDropdownMenu {
+    top: 78px;
+    width: 100%;
+}
+
+.all-experience-wrapper {
+    padding: 12px;
+}
+
+.experience-change-buttons {
+    display: flex;
+    gap: 4px;
+    justify-content: flex-end;
+}
+
+@media (max-width: 992px) {
+    .horizontal-multi-inputs-wrapper {
+        flex-direction: column;
+    }
+
+    .buttons-wraper {
+        flex-direction: column;
+    }
+
+    .pfp-and-name-wrapper {
+        align-items: center;
+        flex-direction: column;
+    }
+}

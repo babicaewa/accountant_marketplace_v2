@@ -1,0 +1,180 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{% static '/css/shared_features.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static '/css/user_portal_shared.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static '/css/profile_analytics.css' %}">
+    <title>legal_marketplace</title>
+</head>
+<body>
+    <div class="nav-and-content">
+        {% include "navbar/user_portal_navbar.html" %}
+        <div class="main-content">
+            <h1 class="page-title">Profile Analytics</h1>
+            <hr class="custom-hr">
+            <div class="multi-sections">
+                <div class="section-wrapper left-horz">
+                    <span class="section-title">
+                        Clients
+                        <i class="bi bi-person"></i>
+                    </span>
+                    <div class="section-content-horz-wrapper multi-vert-section">
+                        <div class="section-big-info-wrapper">
+                            <div class="big-number">
+                                <span>12</span>
+                            </div>
+                                <div class="subtext">Total Clients</div>
+                        </div>
+                        <div class="horz-hr"></div>
+                        <hr style="display:none;">
+                        <div class="section-big-info-wrapper">
+                            <div class="big-number">
+                                <span>2</span>
+                            </div>
+                                <div class="subtext">New Clients This Month</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="section-wrapper">
+                    <span class="section-title">
+                        Profile Views
+                        <i class="bi bi-eye"></i>
+                    </span>
+                    <div class="section-content-horz-wrapper multi-vert-section">
+                        <div class="section-big-info-wrapper">
+                            <div class="big-number">
+                                <span>142</span>
+                            </div>
+                                <div class="subtext">Total Profile Views</div>
+                        </div>
+                        <div class="horz-hr"></div>
+                        <hr style="display:none;">
+                        <div class="section-big-info-wrapper">
+                            <div class="big-number">
+                                <span>2</span>
+                            </div>
+                                <div class="subtext">Profile Views This Month</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="multi-sections">
+                <div class="section-wrapper left-horz" id="revenueSection">
+                    <div class="title-and-other">
+                        <span class="section-title">
+                            Revenue
+                            <i class="bi bi-cash-stack"></i>
+                        </span>
+                        <div class="dropdown-wrapper">
+                            <div class="dropdown-container">
+                                <div class="dropdown-trigger" id="daysDropdown">
+                                    <p id="daysDropdownVal">Past 12 Months</p>
+                                    <i class="bi bi-caret-down-fill"></i>
+                                </div>
+                                <div class="dropdown-menu shadow" id="daysDropdownMenu">
+                                    <ul>
+                                        <li class="dropdown-option days-dropdown-option" id="7DaysSelection">Past 7 Days</li>
+                                        <li class="dropdown-option days-dropdown-option" id="30DaysSelection">Past 30 Days</li>
+                                        <li class="dropdown-option days-dropdown-option" id="12MonthsSelection">Past 12 Months</li>
+                                        <li class="dropdown-option days-dropdown-option" id="allTimeSelection">All Time</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>   
+                    </div>  
+                    <div id="revenue-data-wrapper">
+                        <div class="revenue-amt-wrapper">
+                            <div class="lrg-amount" id="revenueTotal">$1,205.54</div>
+                            <div id="revenuePeriod" class="subtext">In the Last 12 Months</div>    
+                        </div>    
+                        <canvas id="revenueChart"></canvas>
+                    </div>       
+                </div>
+                <div class="stacked-side-section" id="quickStatsSideSection">
+                    <div class="section-wrapper">
+                        <span class="section-title">
+                            Client Satisfaction
+                            <i class="bi bi-emoji-smile"></i>
+                        </span>
+                            <div class="lrg-amount">
+                                <span id="avgStarRating">4.6</span>
+                            </div>
+                            <span class="subtext">Average Profile Rating</span>
+                    </div>
+                    <div class="section-wrapper">
+                        <span class="section-title">
+                            Fufillment Rate
+                            <i class="bi bi-check2-circle"></i>
+                        </span>
+                            <div class="lrg-amount">
+                                <span id="avgServiceTime">30 Days</span>
+                            </div>
+                            <span class="subtext">Average Client Turnaround Time</span>
+                    </div>
+                    <div class="section-wrapper">
+                        <span class="section-title">
+                            Message Responsiveness
+                            <i class="bi bi-chat"></i>
+                        </span>
+                            <div class="lrg-amount">
+                                <span id="avgResponseTime">36h</span>
+                            </div>
+                            <span class="subtext">Your Average Response Time</span>
+                    </div>
+                </div>
+            </div>
+            <div class="section-wrapper">
+                <span class="section-title">
+                    Conversion Funnel
+                    <i class="bi bi-funnel"></i>
+                </span>
+                <div class="funnel-wrapper">
+                    <div class="funnel-layer" id="searchResultsFunnelLayer">
+                        <span>Your Page in Search Results</span>
+                        <span class="big-number">1,000</span>
+                    </div>
+                    <div class="funnel-connector-wrapper subtext">
+                        <span>10%</span>
+                        <i class="bi bi-arrow-down"></i>
+                    </div>
+                    <div class="funnel-layer" id="profileVisitsFunnelLayer">
+                        <span>Total Profile Visits</span>
+                        <span class="big-number">100</span>
+                    </div>
+                    <div class="funnel-connector-wrapper subtext">
+                        <span>20%</span>
+                        <i class="bi bi-arrow-down"></i>
+                    </div>
+                    <div class="funnel-layer" id="serviceRquestsFunnelLayer">
+                        <span>Total Service Requests</span>
+                        <span class="big-number">20</span>
+                    </div>
+                    <div class="funnel-connector-wrapper subtext">
+                        <span>60%</span>
+                        <i class="bi bi-arrow-down"></i>
+                    </div>
+                    <div class="funnel-layer" id="completedServicesFunnelLayer">
+                        <span>Total Completed Services</span>
+                        <span class="big-number">12</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+
+
+</html>
+
+<script src="{% static '/js/profile_analytics.js' %}"></script>
+<script src="{% static '/js/portal_shared.js' %}"></script>
+<script src="{% static '/js/shared_features.js' %}"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

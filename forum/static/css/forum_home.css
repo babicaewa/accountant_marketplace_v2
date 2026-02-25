@@ -1,0 +1,156 @@
+.general-info-section {
+    display: flex;
+    align-items: center;
+    font-size: 0.9rem;
+    color: var(--light-title-color);
+}
+
+.general-info {
+    margin-right: 12px;
+}
+
+.general-info-amt {
+    font-weight: 600;
+    color: black;
+}
+
+.pfps-wrapper {
+    display: flex;
+}
+
+.pfp-and-online-dot {
+    display: flex;
+    align-items: flex-end;
+    margin-left:8px;
+}
+
+.pulsating-dot {
+    width: 12px;
+    height: 12px;
+    background-color: #28c76f;
+    border-radius: 50%;
+    position: relative;
+    margin-left: -7px;
+    top: 4px;
+  }
+  
+  .pulsating-dot::after {
+    content: '';
+    position: absolute;
+    top: -6px;
+    left: -6px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-color: #28c76f;
+    opacity: 0.6;
+    animation: pulse 1.5s infinite;
+  }
+
+.menu-selections-wrapper {
+    gap: 8px;
+}
+
+.recently-online-wrapper {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+}
+
+.pfps-wrapper {
+    margin-left: 12px;
+}
+
+.online-pfp {
+    border:2px solid var(--secondary-color);
+    height: 40px;
+    width: 40px;
+    border-radius: var(--shared-border-radius);
+}
+
+.forum-and-side-cards-wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+.forum-questions-wrapper {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--main-color);
+    width: 70%;
+    border-radius: var(--shared-border-radius);
+}
+
+.forum-question {
+    padding:12px;
+}
+
+.forum-question a {
+    text-decoration: none;
+}
+
+.question-title {
+    color: var(--secondary-color-10);
+    font-weight: 500;
+}
+
+.question-info {
+    font-size: 0.8rem;
+    color: var(--light-title-color);
+}
+
+.question-tags-wrapper {
+    display: flex;
+}
+
+.question-tag {
+    margin: 4px 8px 4px 0px;
+}
+
+.question-hr {
+    margin: 0px !important;
+}
+
+.all-tags-wrapper {
+    width: 30%;
+    background-color: var(--main-color);
+    margin-left:24px;
+    border-radius: var(--shared-border-radius);
+    padding:12px;
+    height: fit-content;
+}
+
+.all-tags {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+@media (max-width: 992px) {
+    .general-info-section {
+        flex-direction: column;
+    }
+
+    .recently-online-wrapper {
+        margin-left: 0;
+        margin-top: 16px;
+    }
+
+    .questions-filter-wrapper {
+        justify-content: center;
+    }
+
+    .forum-and-side-cards-wrapper {
+        flex-direction: column;
+    }
+
+    .forum-questions-wrapper {
+        width: 100%;
+    }
+
+    .all-tags-wrapper {
+        margin-left: 0;
+        margin-top: 16px;
+        width: 100%;
+    }
+}
+

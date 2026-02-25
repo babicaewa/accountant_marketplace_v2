@@ -1,0 +1,73 @@
+{% load static %}
+
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static '/css/portal_navbar.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static '/css/shared_features.css' %}">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+</head>
+
+<div class="vertical-nav-wrapper">
+    <span class="nav-title">legal_marketplace</span>
+    <div class="user-info">
+        <div class="nav-pfp-wrapper">
+            <img class="nav-pfp" src="{% static 'media/headshot.png' %}" alt="pfp">
+        </div>
+        <p class="user-name">whawhdawdhawdhahda</p>
+        <i class="bi bi-caret-down-fill"></i>
+        <div class="profile-info-wrapper">
+            <a href="{% url 'home' %}" class="small-p profile-info-selection">
+                Return to Home Page
+            </a>
+            <hr class="small-divider-hr">
+            <a href="{% url 'logout' %}" class="small-p profile-info-selection log-out-selection">
+                Log Out
+                <i class="bi bi-box-arrow-right"></i>
+            </a>
+        </div>
+    </div>
+</div>
+<div class="navbar-wrapper">
+    <ul class="nav-items-wrapper">
+        <li class="nav-item" id="clientsNav">
+            <a class="nav-link" href="{% url 'portal_user_clients' %}">
+                <i class="bi bi-person-circle"></i>
+                Clients
+            </a>
+        </li>
+        <li class="nav-item" id="allDocumentsNav">
+            <a class="nav-link" href="{% url 'deal_documents' %}">
+                <i class="bi bi-file-earmark-text"></i>
+                Documents
+            </a>
+        </li>
+        <li class="nav-item" id="billingAndPaymentsNav">
+            <a class="nav-link" href="{% url 'user_billing_and_payments' %}">
+                <i class="bi bi-receipt"></i>
+                Billing & Payments
+            </a>
+        </li>
+        <li class="nav-item" id="customizeProfileNav">
+            <a class="nav-link" href="{% url 'edit_profile' %}">
+                <i class="bi bi-person-video2"></i>
+                Customize Profile
+            </a>
+        </li>
+        <li class="nav-item" id="settingsNav">
+            <a class="nav-link" href="{% url 'user_settings' %}">
+                <i class="bi bi-gear"></i>
+                Settings
+            </a>
+        </li>
+    </ul>
+</div>
+<div class="navbar-overlay"></div>
+<div class="mobile-nav-toggle">
+    <i class="bi bi-list"></i>
+</div>
+
+<script src="{% static '/js/user-portal-navbar.js' %}"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>

@@ -1,0 +1,93 @@
+#analyticsNav {
+    background-color: var(--secondary-color-90);
+    color: var(--secondary-color);
+}
+
+.title-and-other {
+    display: flex;
+    justify-content: space-between;
+}
+
+#revenueSection {
+    width: 65% ;
+    margin-left: 0;
+}
+
+#quickStatsSideSection {
+    width: 35%;
+}
+
+#daysDropdown {
+    width: 160px;
+}
+
+#daysDropdownMenu {
+    width: 156px;
+}
+
+.lrg-amount {
+    font-weight: 500;
+    font-size: 1.6rem;
+    margin-bottom: 0;
+}
+
+#revenueChart {
+    margin-top: 24px;
+    width: 100%;
+    height: 400px;
+}
+
+.stacked-side-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.funnel-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding:12px;
+}
+
+.funnel-layer {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding: 12px;
+    border-radius: var(--shared-border-radius);
+    border-width: 2px;
+    border-style: solid;
+    width: 80%;
+}
+
+#searchResultsFunnelLayer {
+    background-color: var(--section-one-color);
+    border-color: var(--section-one-border-color);
+}
+
+#profileVisitsFunnelLayer {
+    background-color: var(--section-two-color);
+    border-color: var(--section-two-border-color);
+}
+
+#serviceRquestsFunnelLayer {
+    background-color: var(--section-three-color);
+    border-color: var(--section-three-border-color);
+}
+
+#completedServicesFunnelLayer {
+    background-color: var(--section-four-color);
+    border-color: var(--section-four-border-color);
+}
+
+@media (max-width: 992px) {
+    #revenueSection {
+        width: 100%;
+    }
+
+    #quickStatsSideSection {
+        width: 100%;
+    }
+}

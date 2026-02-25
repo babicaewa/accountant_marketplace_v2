@@ -1,0 +1,226 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+#include <fcntl.h>
+#include <sys/shm.h>
+#include <sys/mman.h>
+#include <sys/stat.h>
+#include <string.h>
+
+#define SHM_NAME "process_management_shm" //shared memory object name
+#define SIZE 4096 //shared memory object size
+#define MAX_LINE_LENGTH 256 //max line length for input
+#define INITIAL_CAPACITY 25 //initial command array capacity
+#define BUFFER_SIZE 4096
+#define READ_END 0
+#define WRITE_END 1
+
+void writeOutput(char* command, char* output)
+{
+    /* Complete code to save the commands in a output.txt*/
+
+    FILE *fp;
+    fp = fopen("output.txt", "a");
+
+	fprintf(fp, "The output of: %s : is\n", command);
+	fprintf(fp, ">>>>>>>>>>>>>>>\n%s<<<<<<<<<<<<<<<\n", output);	
+    fclose(fp);
+
+}
+
+int main(int argc, char *argv[]) {
+    //Ensure filename containing numbers provided, send proper usage message and abort if not provided
+    if (argc != 2) {
+        printf("Usage: %s <filename>\n", argv[0]);
+        return 1;
+    }
+    int fd;
+    char *ptr;
+
+    fd = shm_open(SHM_NAME, O_CREAT | O_RDWR, 0666);
+    if (fd == -1) {//error checking
+    perror("shm_open");
+    exit(1);
+    }
+
+    ftruncate(fd, SIZE);
+    ptr = (char *) mmap(0, SIZE, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0);
+
+    pid_t child_pid;
+
+    //Fork a child process to read input file contents, store in shm
+    child_pid = fork();
+
+    if (child_pid < 0) { /*Error Forking*/
+        perror("Fork Error: ");
+        return 1;
+
+    } else if (child_pid == 0) { /*Child Process: Read and write input file commands to SHM*/
+        //Open input file with read mode using filename argument
+        FILE *fp;
+        fp = fopen(argv[1], "r");
+
+        //Ensure file opened, otherwise abort
+        if (fp == NULL) {
+            printf("Error opening file %s.", argv[1]);
+            return 1;
+        }
+
+        //Write contents of input file to SHM
+        char line[MAX_LINE_LENGTH];
+        char *current_ptr = ptr;
+        while (fgets(line, sizeof(line), fp) != NULL) {
+            // Write the line to shared memory and increment the pointer
+            sprintf(current_ptr, "%s", line);
+            current_ptr += strlen(line);
+        }
+
+        //Close file, check for error
+        if (fclose(fp) == -1) {
+            printf("Error closing file %s.\n", argv[1]);
+            return 1;
+        }
+
+        //Done
+        exit(0);
+
+    } else { /*Parent Process*/
+        //Wait for child to finish saving commands to memory
+        wait(NULL);
+    }
+
+    //Parent cont...
+
+    /* shared memory file descriptor */
+    int fdtemp;
+    
+    /* pointer to shared memory obect */
+    //int *ptr;
+    
+    /* open the shared memory object */
+    fdtemp = shm_open(SHM_NAME, O_RDONLY, 0666);
+
+    /* configure the size of the shared memory object */
+    ftruncate(fdtemp, SIZE);
+
+    /* memory map the shared memory object */
+    //ptr = (int *)
+    mmap(0, SIZE, PROT_READ, MAP_SHARED, fdtemp, 0);
+
+    // Allocate memory for command array with initial capacity
+    int capacity = INITIAL_CAPACITY;
+    char** commandArray = (char**)malloc(capacity * sizeof(char*));
+    int commandCount = 0;
+
+    // Inside the parent process where you retrieve commands from shared memory
+    const char* commands = (const char*)ptr;
+    const char* ptr2 = commands;
+
+    while (*ptr2 != '\0') {
+        char command[MAX_LINE_LENGTH];
+        int i = 0;
+
+        while (*ptr2 != '\n' && *ptr2 != '\0') {
+            command[i++] = *ptr2++;
+        }
+        command[i] = '\0';
+
+        // Assign space for new command
+        commandArray[commandCount] = (char*)malloc(strlen(command) + 1);
+        strcpy(commandArray[commandCount], command);
+
+        //Skip newline char
+        if (*ptr2 == '\n') { 
+            ptr2++;
+        }
+
+        commandCount++;
+    }
+
+    //Unlink SHM
+    shm_unlink(SHM_NAME);    
+    
+    //Run each command in a child proccess one by one, loop through array
+    for (int i = 0; i < commandCount; i++) {
+            //Establish pipe 
+            
+            /* create the pipe */
+            int pipe_fd[2];
+            if (pipe(pipe_fd) == -1) {
+                fprintf(stderr, "Pipe failed");
+                // Free dynamic allocated array memory
+                for (int i = 0; i < commandCount; i++) {
+                    free(commandArray[i]);
+                }
+                free(commandArray);
+            return 1;
+            }
+
+
+        // Fork a new child to run command
+        pid_t new_child_pid;
+        new_child_pid = fork();
+
+        if (new_child_pid < 0) { /*Error Forking*/
+            perror("Fork Error: ");
+            // Free dynamic allocated array memory
+            for (int i = 0; i < commandCount; i++) {
+                free(commandArray[i]);
+            }
+            free(commandArray);
+            return 1;
+
+        } else if (new_child_pid == 0) { /*New Child Proccess: Run commands and write to pipe*/
+            
+            //printf("TEST Command %d: %s\n", i+1, commandArray[i]);
+            //Run commands
+            char *command[] = {"/bin/sh", "-c", commandArray[i], NULL }; // The command and its arguments
+
+            close(pipe_fd[0]); // Close the read end of the pipe
+
+            // Redirect the standard output to the write end of the pipe
+            dup2(pipe_fd[1], STDOUT_FILENO);
+
+            // Close the write end of the pipe (no longer needed)
+            close(pipe_fd[1]);
+
+                if (execvp(command[0], command) == -1) {
+                    perror("execvp"); // Print an error message if execvp fails
+                    exit(1); // Exit with an error code
+                }
+
+            //Done
+            exit(0);
+
+        } else { /*Parent Process*/
+            close(pipe_fd[1]); // Close the write end of the pipe (not used by the parent)
+
+            char buffer[4096];
+            ssize_t bytesRead;
+
+            while ((bytesRead = read(pipe_fd[0], buffer, sizeof(buffer) - 1)) > 0) {
+                buffer[bytesRead] = '\0';
+                // Call the writeOutput function to write the command and output to the file
+                writeOutput(commandArray[i], buffer);
+            }
+
+
+            close(pipe_fd[0]); // Close the read end of the pipe
+
+            // Wait for the child to exit
+            wait(NULL);
+
+        }
+            
+    }
+
+    // Free dynamic allocated array memory
+    for (int i = 0; i < commandCount; i++) {
+        free(commandArray[i]);
+    }
+    free(commandArray);
+
+    return 0;
+}

@@ -1,0 +1,132 @@
+body {
+    font-family: "Inter";
+}
+
+.navbar-wrapper {
+    margin-top: 66px;
+}
+
+.custom-navbar {
+    background-color: rgba(255,255,255,0.8) !important;
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+}
+
+.nav-link {
+    color: black;
+    border-radius: var(--shared-border-radius);
+    padding: 8px 20px 8px 20px;
+}
+
+.nav-link:hover {
+    color: var(--secondary-color);
+    background-color: var(--secondary-color-90); 
+}
+
+.nav-item {
+    padding: 8px !important;
+    font-size: 0.9rem;
+}
+
+.navbar-toggler {
+    border: none;
+}
+
+.navbar-toggler span {
+    margin: 0;
+    padding: 0;
+}
+
+.navbar-toggler:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.toggler-icon {
+    display: block;
+    position: absolute;
+    width: 100%;
+}
+
+.hamburger-layer {
+    height: 2px;
+    width: 20px;
+    background-color: var(--secondary-color);
+    border-radius: var(--shared-border-radius);
+}
+
+.navbar-toggler .top-bar {
+    transform: rotate(135deg);
+    transition: .35s ease-in-out;
+}
+
+.navbar-toggler .bottom-bar {
+    margin-top: -2px;
+    transform: rotate(-135deg);
+    transition: .35s ease-in-out;
+}
+
+.navbar-toggler.collapsed .top-bar {
+    transform: rotate(0deg);
+}
+
+.navbar-toggler.collapsed .bottom-bar {
+    margin-top: 4px;
+    transform: rotate(0deg);
+}
+
+.login-button {
+    border-radius: var(--shared-round-border-radius);
+    padding: 8px 24px 8px 24px;
+}
+
+.user-info {
+    cursor: pointer;
+}
+
+.nav-pfp {
+    height: 36px;
+    width: 36px;
+    border-radius: var(--shared-border-radius);
+}
+
+.profile-info-wrapper {
+    display: none;
+    background-color: var(--main-color);
+    position: absolute;
+    width: 100%;
+    min-width: 96px;
+    padding: 4px;
+    border-radius: var(--shared-border-radius);
+    border:1px solid var(--section-grey-outline);
+    max-width: 164px;
+    right: 20px;
+}
+
+.profile-info-selection {
+    display: flex;
+    gap: 8px;;
+    margin-bottom: 0;
+    text-decoration: none;
+    padding: 8px;
+    border-radius: var(--shared-border-radius);
+    font-weight: 200;
+}
+
+.profile-info-selection:hover {
+    background-color: var(--other-bg-color);
+}
+
+.log-out-selection {
+    color: red;
+}
+
+@media (max-width: 992px) {
+    #loginNavButton {
+        width: 100%;
+    }
+
+    .profile-info-wrapper {
+        left:20px;
+    }
+}

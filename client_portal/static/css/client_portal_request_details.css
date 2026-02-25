@@ -1,0 +1,227 @@
+#requestsNav {
+    background-color: var(--secondary-color-90);
+    color: var(--secondary-color);
+}
+
+.request-title {
+    font-size: 2.0rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.action-alert-wrapper {
+    display: flex;
+    border: 1px solid var(--secondary-color);
+    border-radius: var(--shared-border-radius);
+    background-color: var(--secondary-color-90);
+    padding:8px;
+    gap: 8px;
+}
+
+.action-alert-wrapper i {
+    color: var(--secondary-color-20);
+}
+
+.action-alert-exit {
+    margin-left: auto;
+    cursor: pointer;
+}
+
+.sub-request-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: var(--shared-border-radius);
+    background-color: var(--main-color);
+    padding:12px;
+    margin: 12px 0px;
+    box-shadow: var(--shared-box-shadow);
+}
+
+.general-request-card-text-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.request-card-info {
+    display: flex;
+    gap: 8px;
+    justify-content: space-between;
+}
+
+.info-and-icon-wrapper {
+    display: flex;
+    gap: 12px;
+}
+
+.request-card-icon {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    color: var(--secondary-color);
+    background-color: var(--secondary-color-90);
+    border-radius: var(--shared-border-radius);
+}
+
+.request-card-main-text {
+    font-weight: 600;
+}
+
+.request-card-sub-text {
+    font-size: 0.8rem;
+    font-weight: 300;
+    color: var(--light-title-color);
+}
+
+.request-card-note-text {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-top: 8px;
+}
+
+.note-title {
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.note-content {
+    background-color: var(--other-bg-color);
+    border-radius: var(--shared-border-radius);
+    padding: 8px;
+    font-weight: 300;
+    font-size: 0.8rem;
+}
+
+.all-documents-wrapper {
+    display: flex;
+    flex-direction: column;
+    border:1px solid var(--section-grey-outline);
+    border-radius: var(--shared-border-radius);
+    padding:8px;
+}
+
+.document-info {
+    display: flex;
+    padding: 6px;
+    font-weight: 300;
+    font-size: 0.9rem;
+    gap: 12px;
+    border-bottom: 1px solid var(--section-grey-outline);
+    align-items: center;
+    justify-content: space-between;
+}
+
+.folder-img {
+    width: 26px;;
+    height: 26px;
+}
+
+.document-buttons {
+    display: flex;
+    gap: 4px;
+}
+
+.all-documents-wrapper li:last-child {
+    border-bottom: none;
+}
+
+.document-name-and-icon {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 300;
+}
+
+.chatbox-wrapper {
+    border-radius: var(--shared-border-radius);
+    border: 1px solid var(--section-grey-outline);
+    background-color: var(--main-color);
+}
+
+.chatbox-header {
+    font-size: 1.2rem;
+    font-weight: 600;
+    padding: 8px 12px;
+}
+
+.chatbox-pfp-img {
+    height: 48px;
+    width: 48px;
+    border-radius: var(--shared-border-radius);
+}
+
+.chatbox-content {
+    border-radius: var(--shared-border-radius);
+}
+
+.msg-wrapper {
+    padding:8px;
+    margin: 0px 12px;
+}
+
+.msg-content {
+    border-radius: var(--shared-border-radius);
+    padding:8px;
+    width: fit-content;
+    max-width: 50%;
+}
+
+.other-msg {
+    background-color: var(--other-bg-color);
+}
+
+.user-msg {
+    background-color: var(--secondary-color-10);
+    color: var(--main-color);
+    margin-left: auto;
+}
+
+.msg-time {
+    font-size: 0.8rem;
+}
+
+.user-msg-time {
+   text-align: end;
+}
+
+.chatbox-input-msg-wrapper {
+    display: flex;
+    padding: 12px;
+    gap: 8px;
+}
+
+.chatbox-input {
+    padding:8px;
+    width:100%;
+}
+
+.chat-send-button {
+    background-color: var(--secondary-color-10) !important;
+}
+
+.chat-send-button:hover {
+    background-color: var(--secondary-color-20) !important;
+}
+
+.detail-wrapper {
+    margin: 12px;
+}
+
+.detail-title {
+    font-size: 1rem !important;
+    margin-bottom: 4px;
+}
+
+.detail-request-desc-text {
+    padding:12px;
+    border:1px solid var(--section-grey-outline);
+    border-radius: var(--shared-border-radius);
+}
+
+@media (max-width: 992px) {
+    .document-buttons {
+        flex-direction: column;
+    }
+}

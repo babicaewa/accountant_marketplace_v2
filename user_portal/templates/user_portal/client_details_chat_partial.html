@@ -1,0 +1,54 @@
+{% load static %}
+
+<div class="chatbox-wrapper" id="chatboxWrapper">
+    <div class="chatbox-header">
+        <div class="chat-name-and-info">
+            <img src="{% static 'media/empty_pfp.png' %}" alt="" class="chatbox-pfp-img">
+            {% if is_client %}
+            <span>{{deal.professional.first_name}} {{deal.professional.last_name}}</span>
+            {%else%}
+            <span>{{deal.client.first_name}} {{deal.client.last_name}}</span>
+            {%endif%}
+        </div>
+       <button class="classic-button-inverse reload-chat-button" hx-get="{% url 'update_chat_messages' deal.id %}" hx-target="#chatboxWrapper" hx-swap="outerHTML">
+        Reload Chat
+        <i class="bi bi-arrow-clockwise"></i>
+        </button>
+    </div>
+    <hr class="small-divider-hr">
+    <div class="chatbox-content" id="chatBoxContent">
+        {%for message in messages%}
+        {%if message.sender == user%}
+        <div class="msg-wrapper">
+            <div class="msg-content user-msg">
+                {{message.message}}
+            </div>
+            <div class="msg-time user-msg-time">
+                {{message.time_sent}}
+            </div>
+        </div>
+        {%elif message.sender != user%}
+        <div class="msg-wrapper">
+            <div class="msg-content other-msg">
+                {{message.message}}
+            </div>
+            <div class="msg-time">
+                {{message.time_sent}}
+            </div>
+        </div>
+        {%endif%}
+        {%endfor%}
+    </div>
+    <hr class="small-divider-hr">
+        <form
+        hx-post="{% url 'send_message' deal.id %}" 
+        hx-target="#chatboxWrapper"
+        hx-swap="outerHTML"
+        class="chatbox-input-msg-wrapper">
+        {% csrf_token %}
+            <input type="text" name="inputted-msg" class="chatbox-input" placeholder="Send message..." autocomplete="off" required>
+            <button class="classic-button chat-send-button" type="submit">
+                <i class="bi bi-send-fill"></i>
+            </button>
+        </form>
+</div>

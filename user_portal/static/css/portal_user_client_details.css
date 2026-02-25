@@ -1,0 +1,303 @@
+.modal-title {
+    font-weight: 600;
+}
+
+.change-stage-button {
+    text-decoration: underline;
+    font-size: 0.8rem;
+    color: var(--secondary-color-20);
+}
+
+.custom-radio-wrapper {
+    display: flex;
+    border: 1px solid transparent;
+}
+
+.custom-radio input[type="radio"] {
+  display: none;
+}
+
+#pendingClientActionRadio:hover {
+    background-color: var(--section-two-color) !important;
+    border-color: var(--section-two-border-color) !important;
+}
+
+#pendingClientActionRadio.active-radio {
+    background-color: var(--section-two-color) !important;
+    border-color: var(--section-two-border-color) !important;
+}
+
+#pendingClientActionRadioCircle{
+    border-color: var(--section-two-border-color) !important;
+}
+
+#pendingClientActionRadioCircle.active-radio-circle {
+    background-color: var(--section-two-border-color) !important;
+}
+
+#readyForPreparationRadio:hover {
+    background-color: var(--section-three-color) !important;
+    border-color: var(--section-three-border-color) !important;
+}
+
+#readyForPreparationRadio.active-radio {
+    background-color: var(--section-three-color) !important;
+    border-color: var(--section-three-border-color) !important;
+}
+
+#readyForPreparationRadioCircle{
+    border-color: var(--section-three-border-color) !important;
+}
+
+#readyForPreparationRadioCircle.active-radio-circle {
+    background-color: var(--section-three-border-color) !important;
+}
+
+
+#awaitingApprovalRadio:hover {
+    background-color: var(--section-four-color) !important;
+    border-color: var(--section-four-border-color) !important;
+}
+
+#awaitingApprovalRadio.active-radio {
+    background-color: var(--section-four-color) !important;
+    border-color: var(--section-four-border-color) !important;
+}
+
+#awaitingApprovalRadioCircle{
+    border-color: var(--section-four-border-color) !important;
+}
+
+#awaitingApprovalRadioCircle.active-radio-circle {
+    background-color: var(--section-four-border-color) !important;
+}
+
+.delete-file-warning-content {
+    padding: 16px;
+}
+
+.delete-warning-buttons-wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    padding: 16px 0px 0px 0px;
+}
+
+#fileToDeleteText {
+    font-weight: 600;
+}
+
+#approvalNote {
+    display: none;
+    font-size: 0.8rem;
+    font-weight: 200;
+}
+
+.file-upload-wrapper {
+    padding: 16px;
+    margin: 16px;
+    border:1px dashed var(--secondary-color-10);
+    border-radius: var(--shared-border-radius);
+}
+
+.note-creation-wrapper {
+    margin: 24px 0px;
+    background-color: var(--main-color);
+    border-radius: var(--shared-border-radius);
+    box-shadow: var(--shared-box-shadow);
+    padding:8px;
+}
+
+.notes-title {
+    margin-bottom: 12px;;
+}
+
+.ql-toolbar {
+    border-radius: var(--shared-border-radius) var(--shared-border-radius) 0px 0px;
+}
+
+#addNoteButton {
+    margin-top: 8px;
+    width: 100%;
+}
+
+#requestsNav {
+    background-color: var(--secondary-color-90);
+    color: var(--secondary-color);
+}
+
+.request-title {
+    font-size: 2.0rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.sub-request-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: var(--shared-border-radius);
+    background-color: var(--main-color);
+    padding:12px;
+    margin: 12px 0px;
+    box-shadow: var(--shared-box-shadow);
+}
+
+.general-request-card-text-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.request-card-info {
+    display: flex;
+    gap: 8px;
+    justify-content: space-between;
+}
+
+.info-and-icon-wrapper {
+    display: flex;
+    gap: 12px;
+}
+
+.request-card-icon {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    color: var(--secondary-color);
+    background-color: var(--secondary-color-90);
+    border-radius: var(--shared-border-radius);
+}
+
+.request-card-main-text {
+    font-weight: 600;
+}
+
+.request-card-sub-text {
+    font-size: 0.8rem;
+    font-weight: 300;
+    color: var(--light-title-color);
+}
+
+.request-card-note-text {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-top: 8px;
+}
+
+.note-title {
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.note-content {
+    background-color: var(--other-bg-color);
+    border-radius: var(--shared-border-radius);
+    padding: 8px;
+    font-weight: 300;
+    font-size: 0.8rem;
+}
+
+.chatbox-wrapper {
+    border-radius: var(--shared-border-radius);
+    border: 1px solid var(--section-grey-outline);
+    background-color: var(--main-color);
+}
+
+.chatbox-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 1.2rem;
+    font-weight: 600;
+    padding: 8px 12px;
+}
+
+.chatbox-pfp-img {
+    height: 48px;
+    width: 48px;
+    border-radius: var(--shared-border-radius);
+}
+
+.chatbox-content {
+    border-radius: var(--shared-border-radius);
+}
+
+.msg-wrapper {
+    padding:8px;
+    margin: 0px 12px;
+}
+
+.msg-content {
+    border-radius: var(--shared-border-radius);
+    padding:8px;
+    width: fit-content;
+    max-width: 50%;
+}
+
+.other-msg {
+    background-color: var(--other-bg-color);
+}
+
+.user-msg {
+    background-color: var(--secondary-color-10);
+    color: var(--main-color);
+    margin-left: auto;
+}
+
+.msg-time {
+    font-size: 0.8rem;
+}
+
+.user-msg-time {
+   text-align: end;
+}
+
+.chatbox-input-msg-wrapper {
+    display: flex;
+    padding: 12px;
+    gap: 8px;
+}
+
+.chatbox-input {
+    padding:8px;
+    width:100%;
+}
+
+.chat-send-button {
+    background-color: var(--secondary-color-10) !important;
+}
+
+.chat-send-button:hover {
+    background-color: var(--secondary-color-20) !important;
+}
+
+.detail-wrapper {
+    margin: 12px;
+}
+
+.detail-title {
+    font-size: 1rem !important;
+    margin-bottom: 4px;
+}
+
+.detail-request-desc-text {
+    padding:12px;
+    border:1px solid var(--section-grey-outline);
+    border-radius: var(--shared-border-radius);
+}
+
+.text-edit-wrapper * {
+    width: 100%;
+}
+
+#notesContent {
+    white-space: pre-wrap;
+}
+
+@media (max-width: 992px) {
+    .chatbox-header {
+        flex-direction: column;
+    }
+}

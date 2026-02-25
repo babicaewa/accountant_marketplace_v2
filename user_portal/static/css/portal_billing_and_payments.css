@@ -1,0 +1,49 @@
+#billingAndPaymentsNav {
+    background-color: var(--secondary-color-90);
+    color: var(--secondary-color);
+}
+#allDocumentsNav {
+    background-color: transparent !important;
+    color: black !important;
+}
+
+#folderDocumentsWrapper {
+    overflow-y: hidden;
+}
+
+.sorting-wrapper {
+    margin-top: 0px !important;
+    color: var(--secondary-color-20);
+}
+
+.sorting-and-documents-wrapper {
+    min-width: 768px;
+}
+
+.sort-button {
+    cursor: pointer;
+}
+
+.sort-button:hover {
+    background-color: var(--secondary-color-90);
+}
+
+.payment-status {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.payment-complete-icon {
+    color: green;
+}
+
+.payment-pending-icon {
+    color: orange;
+}
+
+.service-progress-text {
+    color: var(--light-title-color);
+}

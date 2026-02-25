@@ -1,0 +1,235 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://unpkg.com/htmx.org@1.9.2"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="{% static '/css/shared_features.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static '/css/user_portal_shared.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static '/css/portal_user_clients.css' %}">
+    <title>legal_marketplace</title>
+</head>
+<body>
+
+    {%for new_service_request in all_new_service_requests%}
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="serviceRequest{{new_service_request.id}}" aria-labelledby="serviceRequestLabel{{new_service_request.id}}">
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="serviceRequestLabel{{new_service_request.id}}">Service Request</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <hr class="custom-hr small-divider-hr">
+        <div class="service-request-info-wrapper">
+          <div class="service-request-name">
+            <span class="request-title">Name:</span>
+            <span id="serviceRequestName">{{new_service_request.client.first_name}} {{new_service_request.client.last_name}}</span>
+          </div>
+          <div class="service-request-type">
+            <div class="detail-content">
+                <table class="table table-bordered">
+                    <tr>
+                        <td class="table-header">
+                            Service Type
+                        </td>
+                        <td class="table-header">
+                            Amount Requested
+                        </td>
+                    </tr>
+                    {% for line_item in new_service_request.line_items %}
+                    <tr>
+                        <td><span class="tag">{{line_item.service_type.service_name}}</span></td>
+                        <td>{{line_item.quantity}}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+          </div>
+          <div class="service-request-desc">
+            <span class="request-title">Request Description</span>
+            <div class="request-desc">
+                {{new_service_request.service_details.request_description}}
+            </div>
+          </div>
+          <div class="service-options-buttons-wrapper">
+            <form method="POST" action="{% url 'accept_service_request' new_service_request.id%}" 
+                class="delete-document-form"
+                id="fileDeleteForm"
+                style="width:100%">
+                {% csrf_token %}
+                    <button class="classic-button service-button" type="submit">
+                        Accept Request
+                    </button>
+            </form>
+            <button class="classic-button-inverse service-button">
+                Decline Request
+            </button>
+          </div>
+        </div>
+      </div>
+    {%endfor%}
+
+    <div class="nav-and-content">
+        {% include "navbar/user_portal_navbar.html" %}
+        <div class="main-content">
+            <h1 class="page-title">Clients</h1>
+            <hr class="custom-hr">
+            <div class="section-wrapper">
+                <span class="section-title">
+                    Client Pipeline
+                </span>
+                <div class="status-cards-wrapper">
+                    <div class="status-card shadow-sm" id="serviceRequestsCard">
+                        <div class="status-card-contents">
+                            <p class="card-title">New Service Requests</p>
+                            <p class="card-amount">{{new_service_count}}</p>
+                        </div>
+                    </div>
+                    <div class="status-card shadow-sm" id="servicePendingCard">
+                        <div class="status-card-contents">
+                            <p class="card-title">Pending Client Action</p>
+                            <p class="card-amount">{{pending_client_action_count}}</p>
+                        </div>
+                    </div>
+                    <div class="status-card shadow-sm" id="servicePreparationCard">
+                        <div class="status-card-contents">
+                            <p class="card-title">Ready for Preparation</p>
+                            <p class="card-amount">{{ready_for_preparation_count}}</p>
+                        </div>
+                    </div>
+                    <div class="status-card shadow-sm" id="serviceCompletedCard">
+                        <div class="status-card-contents">
+                            <p class="card-title">Awaiting Approval</p>
+                            <p class="card-amount">{{awaiting_approval_count}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="section-wrapper table-wrapper">
+                {%if all_current_deals.count > 0%}
+                <div class="client-table-wrapper">
+                    <table class="table custom-table clients-table table-responsive">
+                        <thead>
+                            <tr>
+                                <th>Deal ID</th>
+                                <th>Client</th>
+                                <th>Stage</th>
+                                <th>Created At</th>
+                                <th>Details</th>
+                                <th>Options</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {%for deal in all_current_deals%}
+                            <tr>
+                                <td>{{deal.id}}</td>
+                                <td>
+                                    <div class="cell-and-notification-wrapper">
+                                        {{deal.client.first_name}} {{deal.client.last_name}}
+                                        <span class="notification-badge" id="serviceNotification"></span>
+                                    </div>
+                                </td>
+                                {%if deal.deal_stage.stage_name == "New Service Request"%}
+                                <td><span class="client-stage-table-pill new-service-request-table-pill">New Service Request</span></td>
+                                {%elif deal.deal_stage.stage_name == "Pending Client Action"%}
+                                <td><span class="client-stage-table-pill pending-client-action-table-pill">Pending Client Action</span></td>
+                                {%elif deal.deal_stage.stage_name == "Ready for Preparation"%}
+                                <td><span class="client-stage-table-pill ready-for-preparation-table-pill">Ready For Preparation</span></td>
+                                {%elif deal.deal_stage.stage_name == "Awaiting Approval"%}
+                                <td><span class="client-stage-table-pill awaiting-approval-table-pill">Awaiting Approval</span></td>
+                                {%endif%}
+                                <td>{{deal.date_initiated}}</td>
+                                {% if deal.deal_stage.stage_name == "New Service Request"%}
+                                <td><button class="classic-button-inverse table-button" data-bs-toggle="offcanvas" data-bs-target="#serviceRequest{{deal.id}}" aria-controls="serviceRequest{{deal.id}}">View Request</button></td>
+                                {%else%}
+                                <td>
+                                    <a href="{% url 'portal_user_client_details' deal.id %}">
+                                        <button class="classic-button table-button">Visit Deal</button>
+                                    </a>
+                                </td>
+                                {%endif%}
+                                <td>
+                                    <div class="other-client-buttons">
+                                        <div class="client-ellipis-wrapper">
+                                            <i class="bi bi-three-dots title-dropdown client-ellipsis"></i>
+                                            <div class="remove-client-card shadow">
+                                                <span>Terminate Service</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            {%endfor%}
+                        </tbody>
+                    </table>
+                </div>
+                {%else%}
+                <div class="no-deals-wrapper">
+                    No current active deals.
+                </div>
+                {%endif%}
+            </div>
+            <div class="section-wrapper">
+                {%if all_archived_deals.count > 0%}
+                <div class="title-and-dropdown" id="archivedDealsDropdown">
+                    <div class="title-and-notification">
+                        <span class="section-title">Archived Deals</span>
+                    </div>
+                    <i class="bi bi-chevron-down title-dropdown" id="archivedDealsArrow"></i>
+                </div>
+                <span class="archive-warning-text">We strongly recommend you back up any documents related to archived deals to your own computer.</span>
+                <div class="dropdown-content-section" id="archivedDeals">
+                    <div class="client-table-wrapper table-wrapper">
+                        <table class="table custom-table clients-table table-responsive">
+                            <thead>
+                                <tr>
+                                    <th>Deal ID</th>
+                                    <th>Client</th>
+                                    <th>Completed On</th>
+                                    <th>Details</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {%for deal in all_archived_deals%}
+                                <tr>
+                                    <td>{{deal.id}}</td>
+                                    <td>
+                                        <div class="cell-and-notification-wrapper">
+                                            {{deal.client.first_name}} {{deal.client.last_name}}
+                                        </div>
+                                    </td>
+                                    <td>{{deal.completion_date}}</td>
+                                    <td>
+                                        <a href="{% url 'portal_user_client_details' deal.id %}">
+                                            <button class="classic-button table-button">View Details</button>
+                                        </a>
+                                    </td>
+                                </tr>
+                                {%endfor%}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                {%else%}
+                <div class="no-deals-wrapper">
+                    No archived deals within the last 30 days.
+                </div>
+                {%endif%}
+            </div>
+        </div>
+    </div>
+</body>
+
+
+
+</html>
+
+<script src="{% static '/js/shared_features.js' %}"></script>
+<script src="{% static '/js/user_portal_clients.js' %}"></script>
+<script src="{% static '/js/portal_shared.js' %}"></script>
+<script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
+<script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

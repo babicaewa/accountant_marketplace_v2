@@ -1,0 +1,9 @@
+body {
+    background-color: var(--other-bg-color);
+}
+
+.main-content {
+    margin: 24px 10% 24px 10%;
+}
+
+

@@ -1,0 +1,121 @@
+{% load static %}
+
+<div class="section-wrapper documents-section-wrapper" id="allUploadedDocumentsWrapper">
+    {% if is_client %}
+    <div class="document-sub-section">
+        <div class="sub-section-title">
+            <img src="{% static 'media/folder.png' %}" alt="" class="folder-img">
+            Documents Uploaded by {{deal.professional.first_name}}
+        </div>
+        <ul class="all-documents-wrapper">
+            {% if professional_uploaded_documents %}
+                {% for document in professional_uploaded_documents%}
+                <li class="document-info">
+                    <div class="document-name-and-icon">
+                        <img src="{% static 'media/document.png' %}" alt="" class="folder-img">
+                        <span class="document-name">{{document.name}}</span>
+                    </div>
+                    <div class="document-buttons">
+                        <a href="{% url 'download_deal_file' deal.id document.name%}" class="classic-button">
+                            Download
+                            <i class="bi bi-download"></i>
+                        </a>
+                    </div>
+                </li>
+                {%endfor%}
+            {%else%}
+            {{deal.professional.first_name}} has not uploaded any documents yet.
+            {%endif%}
+        </ul>
+    </div>
+    <div class="document-sub-section">
+        <div class="sub-section-title">
+            <img src="{% static 'media/folder.png' %}" alt="" class="folder-img">
+            Your Uploaded Documents
+        </div>
+        <ul class="all-documents-wrapper">
+            {% if client_uploaded_documents %}
+                {% for document in client_uploaded_documents%}
+                <li class="document-info">
+                    <div class="document-name-and-icon">
+                        <img src="{% static 'media/document.png' %}" alt="" class="folder-img">
+                        <span class="document-name">{{document.name}}</span>
+                    </div>
+                    <div class="document-buttons">
+                        <a href="{% url 'download_deal_file' deal.id document.name%}" class="classic-button">
+                            Download
+                            <i class="bi bi-download"></i>
+                        </a>
+                        <button class="classic-button-inverse delete-file-button" data-bs-toggle="modal" data-bs-target="#fileDeleteModal">
+                         {% csrf_token %}
+                            Delete
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </div>
+                </li>
+                {%endfor%}
+            {%else%}
+            You have not uploaded any documents yet.
+            {%endif%}
+        </ul>
+    </div>
+    {%else%}
+    <div class="document-sub-section">
+        <div class="sub-section-title">
+            <img src="{% static 'media/folder.png' %}" alt="" class="folder-img">
+            Documents Uploaded by {{deal.client.first_name}}
+        </div>
+        <ul class="all-documents-wrapper">
+            {% if client_uploaded_documents %}
+                {% for document in client_uploaded_documents%}
+                <li class="document-info">
+                    <div class="document-name-and-icon">
+                        <img src="{% static 'media/document.png' %}" alt="" class="folder-img">
+                        <span class="document-name">{{document.name}}</span>
+                    </div>
+                    <div class="document-buttons">
+                        <a href="{% url 'download_deal_file' deal.id document.name%}" class="classic-button">
+                            Download
+                            <i class="bi bi-download"></i>
+                        </a>
+                    </div>
+                </li>
+                {%endfor%}
+            {%else%}
+            {{deal.client.first_name}} has not uploaded any documents yet.
+            {%endif%}
+        </ul>
+    </div>
+    <div class="document-sub-section">
+        <div class="sub-section-title">
+            <img src="{% static 'media/folder.png' %}" alt="" class="folder-img">
+            Your Uploaded Documents
+        </div>
+        <ul class="all-documents-wrapper">
+            {% if professional_uploaded_documents %}
+                {% for document in professional_uploaded_documents%}
+                <li class="document-info">
+                    <div class="document-name-and-icon">
+                        <img src="{% static 'media/document.png' %}" alt="" class="folder-img">
+                        <span class="document-name">{{document.name}}</span>
+                    </div>
+                    <div class="document-buttons">
+                        <a href="{% url 'download_deal_file' deal.id document.name%}" class="classic-button">
+                            Download
+                            <i class="bi bi-download"></i>
+                        </a>
+                        <button class="classic-button-inverse delete-file-button" data-bs-toggle="modal" data-bs-target="#fileDeleteModal">
+                         {% csrf_token %}
+                            Delete
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </div>
+                </li>
+                {%endfor%}
+            {%else%}
+            You have not uploaded any documents yet.
+            {%endif%}
+        </ul>
+    </div>
+    {%endif%}
+</div>

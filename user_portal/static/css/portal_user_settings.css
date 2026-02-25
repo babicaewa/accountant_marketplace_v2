@@ -1,0 +1,26 @@
+#settingsNav {
+    background-color: var(--secondary-color-90);
+    color: var(--secondary-color);
+}
+
+.settings-option-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px;
+}
+
+.form-check-input {
+    height: 24px !important;
+    width: 48px !important;
+}
+
+
+.option-text-title {
+    font-weight: 600;
+}
+
+.option-text-sub-text {
+    font-size: 0.8rem;
+    color: var(--light-title-color);
+}

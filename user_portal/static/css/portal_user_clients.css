@@ -1,0 +1,265 @@
+#clientsNav {
+    background-color: var(--secondary-color-90);
+    color: var(--secondary-color);
+}
+
+.updated-text {
+    text-align: end;
+}
+
+.status-cards-wrapper {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.status-card {
+    margin: 8px;
+    border-radius: var(--shared-border-radius);
+    background-color: rgba(238,244,254);
+    width: 248px;
+}
+
+#serviceRequestsCard {
+    background-color: var(--section-one-color);
+    border-top: 6px solid var(--section-one-border-color);
+}
+
+#servicePendingCard {
+    background-color:var(--section-two-color);
+    border-top: 6px solid var(--section-two-border-color);
+}
+
+#servicePreparationCard {
+    background-color: var(--section-three-color);
+    border-top: 6px solid var(--section-three-border-color);
+}
+
+#serviceCompletedCard {
+    background-color: var(--section-four-color);
+    border-top: 6px solid var(--section-four-border-color);
+}
+
+.status-card-contents {
+    padding: 16px;
+}
+
+.card-title {
+    color: grey;
+    font-size: 0.9rem;
+}
+
+.card-amount {
+    font-size: 1.6rem;
+    font-weight: 600;
+}
+
+.remove-client-card {
+    display: none;
+    position: absolute;
+    z-index: 2;
+    padding:12px;
+    border: 1px solid var(--section-grey-outline);
+    background-color: var(--main-color);
+    border-radius: var(--shared-border-radius);
+    margin-left: -122px;
+    color: red;
+}
+
+.remove-client-card:hover {
+    background-color: var(--other-bg-color);
+}
+
+.all-clients-wrapper {
+    border: 1px solid var(--section-grey-outline); 
+    border-radius: var(--shared-border-radius);
+    margin-top: 8px;
+}
+
+.client-desc {
+    display: flex;
+    flex-direction: column;
+}
+
+.client-main-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: var(--shared-border-radius);
+    padding:8px;
+    margin:4px 0 4px 0;
+    cursor: pointer;
+}
+
+.client-pfp {
+    height: 60px;
+    width: 60px;
+}
+
+.client-name {
+    font-weight: 500;
+    margin-bottom: 4px;
+}
+
+.last-active-wrapper {
+    font-size: 0.8rem;
+    margin:4px 0px 8px 0px;
+}
+
+.name-and-service-buttons {
+    margin-left: 8px;
+}
+
+.other-client-buttons {
+    display: flex;
+    align-items: center;
+    gap:8px;
+    margin-right: 12px;
+}
+
+.circle-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding:4px;
+    height: 36px;
+    width: 36px;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    background-color: transparent;
+    border: none;
+}
+
+.circle-button:hover {
+    background-color: var(--secondary-color-90);
+}
+
+.change-overlay {
+    display: none;
+    position: absolute;
+    background-color: rgba(0,0,0,0.2);
+    z-index: 2;
+    height: 100%;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    overflow-y: hidden;
+}
+
+.table-wrapper {
+    overflow-y: scroll;
+}
+
+.custom-table {
+    min-width: 962px;
+}
+
+.cell-and-notification-wrapper {
+    display: flex;
+    gap: 2px;
+}
+
+.table-button {
+    width: 100%;
+}
+
+.client-stage-table-pill {
+    padding: 8px 16px;
+    border-radius: var(--shared-border-radius);
+    border: 2px solid;
+}
+
+.new-service-request-table-pill {
+    background-color: var(--section-one-color);
+    border-color: var(--section-one-border-color);
+}
+
+.pending-client-action-table-pill {
+    background-color: var(--section-two-color);
+    border-color: var(--section-two-border-color);
+}
+
+.ready-for-preparation-table-pill {
+    background-color: var(--section-three-color);
+    border-color: var(--section-three-border-color);
+}
+
+.awaiting-approval-table-pill {
+    background-color: var(--section-four-color);
+    border-color: var(--section-four-border-color);
+}
+
+.change-modal {
+    padding:24px;
+    width:50%;
+    background-color: var(--main-color);
+    min-width: 360px;
+}
+
+.modal-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.modal-title-and-exit {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.filter-title-and-selector {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.dropdown-container {
+    margin-left: 0 !important;;
+}
+
+.service-request-info-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap:24px;
+    padding:24px;
+}
+
+.request-title {
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.request-desc {
+    border: 1px solid var(--section-grey-outline);
+    border-radius: var(--shared-border-radius);
+    padding:12px;
+    margin-top: 12px;;
+}
+
+.service-options-buttons-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap:8px;
+    justify-content: center;
+    width: 100%;
+}
+
+.service-options-buttons-wrapper button {
+    width: 100%;
+}
+
+.offcanvas {
+    width: 30% !important;
+    min-width: 320px !important;
+}
+
+.archive-warning-text {
+    font-size: 0.8rem;
+    font-weight: 200;
+}
+
+.no-deals-wrapper {
+    font-weight: 600;
+}

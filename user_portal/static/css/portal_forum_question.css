@@ -1,0 +1,31 @@
+.forum-question-wrapper {
+    margin-top: 0px;
+}
+
+.forum-question-content {
+    padding: 0px;
+}
+
+.response {
+    padding: 0;
+    margin: 0;
+}
+
+.other-response {
+    border: 2px solid var(--section-grey-outline);
+    padding: 12px;
+    margin-top: 12px;
+}
+
+.response-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+#userQuestionResponse {
+    width: 100%;
+}
+.response-button {
+    width: 100%;
+}

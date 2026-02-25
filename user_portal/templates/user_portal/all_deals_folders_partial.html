@@ -1,0 +1,54 @@
+{% load static %}
+<div class="section-wrapper" id="folderDocumentsWrapper">
+    <div class="search-input-wrapper">
+        <i class="bi bi-search"></i>
+        <input class="general-search-input" id="documentSearchInput" type="text" placeholder="Search for Files...">
+    </div>
+    <nav aria-label="breadcrumb" class="mt-3">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item breadcrumb-link">
+            <a 
+            hx-get="{% url 'get_all_deals_folders' %}" 
+            hx-target="#folderDocumentsWrapper"
+            hx-swap="outerHTML"
+            style="cursor: pointer;">All Documents</a></li>
+        </ol>
+      </nav>
+   <div class="sorting-wrapper">
+    <span>Deal ID</span>
+    <span>Size</span>
+    <span>Date</span>
+    <span class="download-sort">View/Download</span>
+   </div>
+   <hr class="small-divider-hr">
+   <div class="all-documents">
+    {%if all_deals %}
+    {%for deal in all_deals %}
+    <div 
+    hx-get="{% url 'get_related_deal_documents' deal.id%}" 
+    hx-target="#folderDocumentsWrapper"
+    hx-swap="outerHTML"
+    style="cursor: pointer;">
+        <div class="document-wrapper folder-wrapper">
+            <div class="document-name">
+                <img src="{% static 'media/folder.png' %}" alt="" class="folder-img">
+                <span class="document-name-text">{{deal.id}} - {{deal.client.first_name}} {{deal.client.last_name}}</span>
+            </div>
+            <div class="document-size">
+            </div>
+            <div class="document-date">
+                {{deal.date_initiated}}
+            </div>
+            <div class="document-download">
+            </div>
+        </div>
+    </div>
+    {%endfor%}
+    <div class="no-results-option" style="display:none;">
+        No documents matching your search.
+    </div>
+    {%else%}
+    <span>There are no deal documents yet...</span>
+    {%endif%}
+   </div>
+</div>

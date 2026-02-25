@@ -1,0 +1,87 @@
+#billingAndPaymentsNav {
+    background-color: var(--secondary-color-90);
+    color: var(--secondary-color);
+}
+
+.search-input-wrapper {
+    min-width: 214px !important;
+    width: 30% !important;
+}
+
+.payment-title {
+    font-size: 1.1rem;
+    font-weight: 500;
+    display: flex;
+    flex-direction: column;
+}
+
+.service-id {
+    font-size: 0.9rem;
+    font-weight: 300;
+    color: var(--light-title-color);
+}
+
+.service-request-date {
+    font-size: 0.9rem;
+    margin: 4px 0px;
+}
+
+.billing-details-wrapper {
+    border: 1px solid var(--section-grey-outline);
+    width: 50%;
+    border-radius: var(--shared-border-radius);
+}
+
+.billing-details-toggle {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 600;
+    padding:8px;
+    cursor: pointer;
+}
+
+.billing-details-content {
+    display: none;
+}
+
+.billing-line-item {
+    padding: 12px;
+}
+
+.line-item-desc-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.line-item-name, .line-item-price {
+    font-weight: 500;
+}
+
+.payment-status {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding-left: 12px;
+    font-size: 0.8rem;
+    font-weight: 300;
+}
+
+.payment-complete-icon {
+    color: green;
+}
+
+.payment-pending-icon {
+    color: orange;
+}
+
+.reciept-download-button {
+    margin: 8px 0px;
+    width: 100%;
+}
+
+@media (max-width: 992px) {
+    .billing-details-wrapper {
+        width: 100%;
+    }
+}

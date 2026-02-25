@@ -1,0 +1,115 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{% static '/css/shared_features.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static '/css/home.css' %}">
+    <title>legal_marketplace</title>
+</head>
+{% include "navbar/navbar.html" %}
+{% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <div class="action-alert-wrapper mt-3" style="position:absolute;">
+                <div class="action-alert-text">
+                    <i class="bi bi-info-circle-fill"></i>
+                    <span>{{message}}</span>
+                </div>
+                <i class="bi bi-x action-alert-exit"></i>
+            </div>
+            {% endfor %}
+        </ul>
+    {% endif %}
+<body>
+    <div class="section" style="padding:0px;">
+        <div class="side-section">
+            <div class="text-sub-section">
+                <h2>Get your tax returns done.</h2>
+                <p>legal_marketplace has your back.</p>
+            </div>
+            <button class="classic-button-inverse">
+                Search for Accountants
+            </button>
+        </div>
+        <div class="side-section">
+            <img src="{% static 'media/woman_laptop.jpg' %}" alt="Woman at Laptop">
+        </div>
+    </div>
+    <div class="section vertical-section">
+        <div class="text-sub-section">
+            <h2>Ask real accountants, get real advice.</h2>
+            <p>Use our expansive network of accountants to answer your accounting questions.</p>
+            <button class="classic-button">
+                Ask a Question
+            </button>
+        </div>
+        <div class="section" id="graph-section">
+            <img src="{% static 'media/network_of_people.png' %}" alt="Network of People" id="network-photo">
+        </div>
+    </div>
+    <div class="section special-section">
+        <div class="text-sub-section mt-5 mb-5">
+            <h2>Are you an accountant and looking to increase your presence?</h2>
+            <p>Join us today, for free. No credit card required.</p>
+            <button class="classic-button-inverse">
+                Sign up with us for Free!
+            </button>
+        </div>
+    </div>
+    <div class="section other-section">
+        <div class="side-section side-section-v2">
+            <div>
+                <div class="text-sub-section">
+                    <h2>We've reduced the hassle of finding a accountant.</h2>
+                    <p>legal_marketplace has made it easier than ever 
+                        to find an accountant that can fufill your needs. 
+                        With numerous filtering options, we are positive 
+                        that you'll be satisfied!
+                    </p>
+                </div>
+                <div class="quick-search mt-5">
+                    <h4>Try a quick search!</h4>
+                    <form action="">
+                        <div class="quick-search-form">
+                            <div class="input-group">
+                                <input type="text" aria-label="Legal service" placeholder="Accounting service needed?" class="form-control">
+                                <input type="text" aria-label="Location" placeholder="Where are you located?" class="form-control">
+                                <button class="classic-button" type="button" id="button-addon2">
+                                    Search
+                                    <i class="bi bi-search"></i>
+                                </button>
+                            </div>    
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+            <img src="{% static 'media/lawyer_connecting(1)(1).png' %}" alt="People Connecting">
+    </div>
+    <div class="section us-section mt-5 mb-5">
+        <h2>Learn more about legal_marketplace</h2>
+        <div class="us-buttons-wrapper">
+            <button class="classic-button m-3">
+                Our Values
+            </button>
+            <button class="classic-button m-3">
+                Our Misison
+            </button>
+            <button class="classic-button m-3">
+                Our Story
+            </button>
+        </div>
+    </div>
+</body>
+
+{% include "footer/footer.html" %}
+
+</html>
+
+<script src="{% static '/js/shared_features.js' %}"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

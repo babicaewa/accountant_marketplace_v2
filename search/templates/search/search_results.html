@@ -1,0 +1,293 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" type="text/css" href="{% static '/css/shared_features.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static '/css/search_results.css' %}">
+    <title>Search Results | legal_marketplace</title>
+</head>
+{% include "navbar/navbar.html" %}
+
+<body>
+    <div class="content-wrapper">
+        <div class="search-form-title">
+            <h1>Find an Accountant</h1>
+        </div>
+        <hr class="custom-hr">
+        <div class="search-form-wrapper shadow-sm">
+            <form action="{% url 'search_results'%}" method="GET" class="search-form">
+                <div class="search-form-inputs">
+                    <div class="input-wrapper">
+                        <label for="serviceTypeInput" class="input-label">Service</label>
+                        <input type="text" aria-label="serviceTypeInput" placeholder="Type of Service" class="search-input" id="serviceTypeInput" name="serviceType" readonly>
+                        <div class="dropdown-menu search-dropdown shadow" id="serviceDropdownMenu">
+                            <ul>
+                                <li class="dropdown-option search-option">Any Service</li>
+                                <li class="dropdown-option search-option">Consultation</li>
+                                <li class="dropdown-option search-option">Personal Tax Return</li>
+                                <li class="dropdown-option search-option">Business Tax Return</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="input-wrapper">
+                        <label for="locationInput" class="input-label">Location (in Ontario)</label>
+                        <input type="text" aria-label="Location" placeholder="Nearby City" class="search-input" id="locationInput" name="location">
+                        <div class="dropdown-menu search-dropdown shadow" id="citiesDropdownMenu">
+                            <ul>
+                                <li class="dropdown-option search-option">Ajax</li>
+                                <li class="dropdown-option search-option">Alexandria</li>
+                                <li class="dropdown-option search-option">Alfred</li>
+                                <li class="dropdown-option search-option">Alliston</li>
+                                <li class="dropdown-option search-option">Almonte</li>
+                                <li class="dropdown-option search-option">Amherstburg</li>
+                                <li class="dropdown-option search-option">Amherstview</li>
+                                <li class="dropdown-option search-option">Angus</li>
+                                <li class="dropdown-option search-option">Ancaster</li>
+                                <li class="dropdown-option search-option">Arnprior</li>
+                                <li class="dropdown-option search-option">Atikokan</li>
+                                <li class="dropdown-option search-option">Aurora</li>
+                                <li class="dropdown-option search-option">Aylmer</li>
+                                <li class="dropdown-option search-option">Bancroft</li>
+                                <li class="dropdown-option search-option">Barrie</li>
+                                <li class="dropdown-option search-option">Beamsville</li>
+                                <li class="dropdown-option search-option">Belleville</li>
+                                <li class="dropdown-option search-option">Bracebridge</li>
+                                <li class="dropdown-option search-option">Bradford</li>
+                                <li class="dropdown-option search-option">Brampton</li>
+                                <li class="dropdown-option search-option">Brantford</li>
+                                <li class="dropdown-option search-option">Brockville</li>
+                                <li class="dropdown-option search-option">Burlington</li>
+                                <li class="dropdown-option search-option">Cambridge</li>
+                                <li class="dropdown-option search-option">Carleton Place</li>
+                                <li class="dropdown-option search-option">Chatham-Kent</li>
+                                <li class="dropdown-option search-option">Clarence-Rockland</li>
+                                <li class="dropdown-option search-option">Cobourg</li>
+                                <li class="dropdown-option search-option">Collingwood</li>
+                                <li class="dropdown-option search-option">Cornwall</li>
+                                <li class="dropdown-option search-option">Dryden</li>
+                                <li class="dropdown-option search-option">Elliot Lake</li>
+                                <li class="dropdown-option search-option">Englehart</li>
+                                <li class="dropdown-option search-option">Erin</li>
+                                <li class="dropdown-option search-option">Espanola</li>
+                                <li class="dropdown-option search-option">Fort Erie</li>
+                                <li class="dropdown-option search-option">Fort Frances</li>
+                                <li class="dropdown-option search-option">Gananoque</li>
+                                <li class="dropdown-option search-option">Goderich</li>
+                                <li class="dropdown-option search-option">Gravenhurst</li>
+                                <li class="dropdown-option search-option">Guelph</li>
+                                <li class="dropdown-option search-option">Halton Hills</li>
+                                <li class="dropdown-option search-option">Hamilton</li>
+                                <li class="dropdown-option search-option">Hanover</li>
+                                <li class="dropdown-option search-option">Hawkesbury</li>
+                                <li class="dropdown-option search-option">Hearst</li>
+                                <li class="dropdown-option search-option">Huntsville</li>
+                                <li class="dropdown-option search-option">Ingersoll</li>
+                                <li class="dropdown-option search-option">Innisfil</li>
+                                <li class="dropdown-option search-option">Iroquois Falls</li>
+                                <li class="dropdown-option search-option">Kapuskasing</li>
+                                <li class="dropdown-option search-option">Kawartha Lakes</li>
+                                <li class="dropdown-option search-option">Kenora</li>
+                                <li class="dropdown-option search-option">Kingston</li>
+                                <li class="dropdown-option search-option">Kirkland Lake</li>
+                                <li class="dropdown-option search-option">Kitchener</li>
+                                <li class="dropdown-option search-option">Leamington</li>
+                                <li class="dropdown-option search-option">London</li>
+                                <li class="dropdown-option search-option">Markham</li>
+                                <li class="dropdown-option search-option">Midland</li>
+                                <li class="dropdown-option search-option">Milton</li>
+                                <li class="dropdown-option search-option">Mississauga</li>
+                                <li class="dropdown-option search-option">Newmarket</li>
+                                <li class="dropdown-option search-option">Niagara Falls</li>
+                                <li class="dropdown-option search-option">Niagara-on-the-Lake</li>
+                                <li class="dropdown-option search-option">North Bay</li>
+                                <li class="dropdown-option search-option">Oakville</li>
+                                <li class="dropdown-option search-option">Orillia</li>
+                                <li class="dropdown-option search-option">Oshawa</li>
+                                <li class="dropdown-option search-option">Ottawa</li>
+                                <li class="dropdown-option search-option">Owen Sound</li>
+                                <li class="dropdown-option search-option">Parry Sound</li>
+                                <li class="dropdown-option search-option">Pembroke</li>
+                                <li class="dropdown-option search-option">Penetanguishene</li>
+                                <li class="dropdown-option search-option">Perth</li>
+                                <li class="dropdown-option search-option">Peterborough</li>
+                                <li class="dropdown-option search-option">Petrolia</li>
+                                <li class="dropdown-option search-option">Pickering</li>
+                                <li class="dropdown-option search-option">Port Colborne</li>
+                                <li class="dropdown-option search-option">Port Hope</li>
+                                <li class="dropdown-option search-option">Prescott</li>
+                                <li class="dropdown-option search-option">Richmond Hill</li>
+                                <li class="dropdown-option search-option">Sarnia</li>
+                                <li class="dropdown-option search-option">Sault Ste. Marie</li>
+                                <li class="dropdown-option search-option">Scarborough</li>
+                                <li class="dropdown-option search-option">Simcoe</li>
+                                <li class="dropdown-option search-option">Smiths Falls</li>
+                                <li class="dropdown-option search-option">St. Catharines</li>
+                                <li class="dropdown-option search-option">St. Marys</li>
+                                <li class="dropdown-option search-option">St. Thomas</li>
+                                <li class="dropdown-option search-option">Stratford</li>
+                                <li class="dropdown-option search-option">Sudbury</li>
+                                <li class="dropdown-option search-option">Temiskaming Shores</li>
+                                <li class="dropdown-option search-option">Thorold</li>
+                                <li class="dropdown-option search-option">Thunder Bay</li>
+                                <li class="dropdown-option search-option">Timmins</li>
+                                <li class="dropdown-option search-option">Toronto</li>
+                                <li class="dropdown-option search-option">Trenton</li>
+                                <li class="dropdown-option search-option">Uxbridge</li>
+                                <li class="dropdown-option search-option">Vaughan</li>
+                                <li class="dropdown-option search-option">Wasaga Beach</li>
+                                <li class="dropdown-option search-option">Waterloo</li>
+                                <li class="dropdown-option search-option">Welland</li>
+                                <li class="dropdown-option search-option">Whitby</li>
+                                <li class="dropdown-option search-option">Windsor</li>
+                                <li class="dropdown-option search-option">Woodstock</li>
+                                <li class="no-results-option">No Results...</li>
+                              </ul>
+                        </div>
+                    </div>
+                    <button type="submit" class="classic-button search-button">
+                        Search
+                        <i class="bi bi-search"></i>
+                    </button>
+                </div>
+                <div class="advanced-search" id="advancedSearch">
+                    <div class="advanced-search-inputs-wrapper">
+                        <div class="input-wrapper">
+                            <label for="location-radius" class="input-label radius-label">Location Radius</label>
+                            <input type="range" min="1" max="100" value="30" class="slider" id="location-radius" name="location-radius">
+                            <p class="radius-value" id="radius-value" value="">30 km</p>
+                        </div>
+                        <div class="input-wrapper">
+                            <label for="languagesInput" class="input-label">Other Langauges</label>
+                            <input type="text" aria-label="Location" class="search-input" id="languagesInput" name="language">
+                            <div class="dropdown-menu search-dropdown shadow" id="languagesDropdownMenu">
+                                <ul>
+                                    {%for language in all_languages %}
+                                    <li class="dropdown-option search-option">{{language.language}}</li>
+                                    {%endfor%}
+                                    <li class="no-results-option">No Results...</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="input-wrapper">
+                            <label for="hourly-rate-input" class="input-label">Maximum Rate ($)</label>
+                            <input type="number" aria-label="Free consult" min="0" class="search-input" id="hourly-rate-input" name="rate">
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="advanced-search-button-wrapper">
+            <button type="button" class="advanced-search-button" id="advancedSearchButton">
+                Advanced Search
+                <i class="bi bi-plus" id="plus"></i>
+                <i class="bi bi-dash" id="minus"></i>
+            </button>
+        </div>
+        <div class="profiles-wrapper">
+            <div class="search-results-and-filter-wrapper">
+                <div class="search-results-amt">
+                    <h3>Search Results</h3>
+                    <span id="searchTotal">{{professionals.count}} {%if professionals.count == 1%}Professional{%else%}Professionals{%endif%}</span>
+                </div>
+                <div class="filter-wrapper">
+                    <span>Filter By:</span>
+                    <div class="dropdown-wrapper">
+                        <div class="dropdown-container">
+                            <div class="dropdown-trigger" id="filterDropdown">
+                                <p id="filterDropdownVal">Rating: High to Low</p>
+                                <i class="bi bi-caret-down-fill"></i>
+                            </div>
+                            <div class="dropdown-menu shadow" id="filterDropdownMenu">
+                                <ul>
+                                    <li class="dropdown-option days-dropdown-option" id="ratingHighToLowSelection">Rating: High to Low</li>
+                                    <li class="dropdown-option days-dropdown-option" id="ratingLowToHighSelection">Rating: Low to High</li>
+                                    <li class="dropdown-option days-dropdown-option" id="serviceRateHighToLowSelection">Service Rate: High to Low</li>
+                                    <li class="dropdown-option days-dropdown-option" id="serviceRateLowToHighSelection">Service Rate: Low to High</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>  
+                </div>
+            </div>
+            <hr>                
+            {% if professionals.count == 0 %}
+            <div class="none-found">
+                No professionals found, please adjust your search criteria and try again.
+            </div>
+            {%else%}
+            <div class="all-profiles">
+                {% for professional in professionals %}
+                <a href="{% url 'profile' professional.first_name professional.last_name professional.id %}">
+                    <div class="profile">
+                        <div class="info-wrapper">
+                            <img src="{% static 'media/headshot.png' %}" alt="pfp" class="pfp">
+                            <div class="main-info">
+                                <h5>{{professional.first_name}} {{professional.last_name}}</h5>
+                                {% if professional.professional_title %}
+                                <span class="company-name">{{professional.professional_title}} at {{professional.professional_company}}</span>
+                                {% endif %}
+                                <div class="rating-wrapper small-p">
+                                    {% if professional.reviews_count > 0 %}
+                                        {% for num in "12345" %}
+                                            {% if forloop.counter == professional.half_star_index %}
+                                            <i class="bi bi-star-half star-icon"></i>
+                                            {% elif forloop.counter <= professional.avg_review_score %}
+                                            <i class="bi bi-star-fill star-icon"></i>
+                                            {% else %}
+                                            <i class="bi bi-star star-icon"></i>
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endif %}
+                                    <span>
+                                        {% if professional.reviews_count > 1 %}
+                                            {{professional.reviews_count}} Reviews
+                                            {% elif professional.reviews_count == 1 %}
+                                            {{professional.reviews_count}} Review
+                                            {% else %}
+                                            No reviews yet.
+                                        {% endif %}
+                                    </span>
+                                </div>
+                                <div class="info-and-icon small-p">
+                                    {% if professional.search_service_fee.fee %}
+                                    <span>{{service_name}}s starting at <b>${{professional.search_service_fee.fee}}</b></span>
+                                    {% else %}
+                                    {%endif%}
+                                </div>
+                            </div>
+                            <div class="buttons-wrapper">
+                                <div class="profile-buttons">
+                                    <button class="classic-button-inverse">
+                                        <i class="bi bi-person-circle"></i>
+                                        Profile
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                {% if not forloop.last %}
+                <hr>
+                {% endif %}
+                {% endfor %}
+                {%endif%}
+            </div>
+        </div>
+    </div>
+    
+</body>
+
+
+{% include "footer/footer.html" %}
+
+</html>
+
+<script src="{% static '/js/search_results.js' %}"></script>
+<script src="{% static '/js/shared_features.js' %}"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

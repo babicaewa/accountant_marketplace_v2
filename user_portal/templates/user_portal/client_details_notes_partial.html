@@ -1,0 +1,19 @@
+{% load static %}
+
+<div class="section-wrapper" id="notesWrapper">
+    <div class="section-title notes-title">Notes</div>
+    <div class="section-content" id="notesContent">{% if deal_notes %}{{deal_notes.note}}{%else%}No notes yet, add some!{%endif%}</div>
+    <form
+        hx-post="{% url 'update_notes' deal.id %}" 
+        hx-target="#notesWrapper"
+        hx-swap="outerHTML"
+        class="text-edit-wrapper" 
+        id="notesTextEditWrapper"
+        style="display:none;">
+        {% csrf_token %}
+            <textarea name="deal-notes-text" id="" cols="30" rows="10" placeholder="Add notes...">{% if deal_notes.note %}{{ deal_notes.note }}{% endif %}</textarea>
+            <button class="classic-button-inverse" id="addNoteButton" type="submit">
+                Add Changes
+            </button>
+    </form>
+</div>
